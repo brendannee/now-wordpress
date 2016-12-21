@@ -1,10 +1,11 @@
 FROM hhvm/hhvm:3.15.3
 RUN add-apt-repository ppa:nginx/stable
 RUN apt-get -qq update
-RUN apt-get -y install nginx-light curl unzip
+RUN apt-get -y install nginx-light curl unzip supervisor
 
-# Configure nginx
+# Configure configuration
 COPY nginx.conf /etc/nginx/nginx.conf
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Install wordpress
 RUN mkdir -p /var/www
@@ -26,4 +27,4 @@ COPY wp-content/plugins/* /var/www/public/wp-content/plugins
 EXPOSE 3000
 
 # Define default command.
-CMD ["nginx"]
+CMD ["/usr/bin/supervisord"]

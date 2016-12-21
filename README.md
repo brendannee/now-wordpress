@@ -91,6 +91,29 @@ project
     |-- themes
 ```
 
+## Running locally
+
+To build the docker image and run it locally, run this from the project directory:
+
+    docker build .
+
+Get the image ID from the step above, or run `docker images` to list all locally created images. With the image ID:
+
+    docker run -d -P --env-file .env <YOUR IMAGE ID>
+
+Check running containers to see what port your container is running on and the Container ID:
+
+    docker ps
+
+Open your browser to the port that the container is running on, for instance:
+
+    http://localhost:32774
+
+To see logs from the local instance, run
+
+    docker logs -f <YOUR CONTAINER ID>
+
+
 ## Deploy to Now
 
 To deploy to now with all of the environment variables set in the `.env` file, you can run:
