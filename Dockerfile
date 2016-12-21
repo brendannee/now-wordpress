@@ -4,7 +4,7 @@ RUN apt-get -qq update
 RUN apt-get -y install nginx-light curl unzip
 
 # Configure nginx
-RUN cp nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Install wordpress
 RUN mkdir -p /var/www
@@ -19,8 +19,8 @@ COPY wp-config.php /var/www/public/wp-config.php
 RUN curl https://api.wordpress.org/secret-key/1.1/salt/ >> /var/www/public/wp-config.php
 
 # Copy themes and plugins
-RUN if [ "$(ls -A ./wp-content/themes/*)" ]; then cp -R ./wp-content/themes/* /var/www/public/wp-content/themes; fi
-RUN if [ "$(ls -A ./wp-content/plugins/*)" ]; then cp -R wp-content/plugins/* /var/www/public/wp-content/plugins; fi
+COPY wp-content/themes/* /var/www/public/wp-content/themes
+COPY wp-content/plugins/* /var/www/public/wp-content/plugins
 
 # Expose ports.
 EXPOSE 3000
