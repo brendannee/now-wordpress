@@ -80,13 +80,16 @@ For example:
 
 Create a folder for your project locally, and add a `wp-content` folder inside of it. Inside of this folder you can add a folder called `themes` and `plugins` and add any themes or plugins your site depends on. The directory structure of your project should look like this:
 
-|____.env
-|____Dockerfile
-|____nginx.conf
-|____wp-config.php
-|____wp-content
-| |____plugins
-| |____themes
+```
+project
+|-- .env
+|-- Dockerfile
+|-- nginx.conf
+|-- wp-config.php
+|-- wp-content
+    |-- plugins
+    |-- themes
+```
 
 ## Deploy to Now
 
