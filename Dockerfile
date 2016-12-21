@@ -24,7 +24,7 @@ COPY wp-content/themes/* /var/www/public/wp-content/themes
 COPY wp-content/plugins/* /var/www/public/wp-content/plugins
 
 # Expose ports.
-EXPOSE 80
+EXPOSE 3000
 
 # Define default command.
 CMD ["/usr/bin/supervisord"]
