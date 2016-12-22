@@ -1,17 +1,21 @@
 FROM hhvm/hhvm:3.15.3
-RUN add-apt-repository ppa:nginx/stable
-RUN apt-get -qq update
-RUN apt-get -y install nginx-light curl unzip supervisor
+
+RUN \
+  add-apt-repository ppa:nginx/stable && \
+  apt-get -qq update && \
+  apt-get -y install nginx-light curl unzip supervisor  && \
+  apt-get -y -qq install sendmail
 
 # Configure configuration
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Install wordpress
-RUN mkdir -p /var/www
-RUN curl https://wordpress.org/latest.zip -o /var/www/latest.zip
-RUN cd /var/www && unzip latest.zip
-RUN mv /var/www/wordpress /var/www/public
+# Install Wordpress
+RUN \
+  mkdir -p /var/www && \
+  curl https://wordpress.org/latest.zip -o /var/www/latest.zip && \
+  cd /var/www && unzip latest.zip && \
+  mv /var/www/wordpress /var/www/public
 
 # Create wp-config.php
 COPY wp-config.php /var/www/public/wp-config.php
@@ -26,5 +30,5 @@ COPY wp-content/plugins/* /var/www/public/wp-content/plugins
 # Expose ports.
 EXPOSE 3000
 
-# Define default command.
+# Define default command
 CMD ["/usr/bin/supervisord"]
