@@ -119,3 +119,9 @@ To see logs from the local instance, run
 To deploy to now with all of the environment variables set in the `.env` file, you can run:
 
     sed 's/^/-e /' .env | xargs now --docker
+
+## Configure domain name with Now
+
+See [these instructions](https://zeit.domains/).
+
+Note that you won't be able to log into the Wordpress admin if it is running on a domain that is different from what was set in the `wp_options` table of your database.
